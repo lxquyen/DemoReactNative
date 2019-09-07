@@ -4,10 +4,13 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 
 import LoginScreen from '../components/auth/LoginScreen';
 import RegisterScreen from '../components/auth/RegisterScreen';
-import HomeScreen from '../components/main/HomeScreen';
 import DetailScreen from '../components/main/DetailScreen';
 import SettingScreen from '../components/main/SettingScreen';
 import SplashScreen from '../components/splash/SplashScreen';
+import React from 'react';
+import AddScreen from '../components/main/AddScreen';
+import HomeContainer from '../container/HomeContainer';
+import AddContainer from '../container/AddContainer';
 
 const SplashStack = createStackNavigator({
     Splash: {
@@ -30,16 +33,34 @@ const AuthStack = createStackNavigator({
 
 const HomeStack = createStackNavigator({
     Home: {
-        screen: HomeScreen,
+        screen: HomeContainer,
     },
     Detail: {
         screen: DetailScreen,
+    },
+    Add: {
+        screen: AddContainer,
+    },
+}, {
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: '#f4511e',
+        },
+        headerTitleContainerStyle: {
+            fontWeight: 'bold',
+        },
+    },
+    navigationOptions: {
+        tabBarLabel: 'Home!',
     },
 });
 
 const SettingStack = createStackNavigator({
     Setting: {
         screen: SettingScreen,
+    },
+    Detail: {
+        screen: DetailScreen,
     },
 });
 
@@ -51,6 +72,12 @@ const TabNavigator = createBottomTabNavigator({
     Setting: {
         screen: SettingStack,
     },
+}, {
+    tabBarOptions: {
+        activeTintColor: 'tomato',
+        inactiveTintColor: 'gray',
+    },
+    initialRouteName: 'Home',
 });
 
 const SwitchNavigator = createSwitchNavigator({
@@ -60,7 +87,7 @@ const SwitchNavigator = createSwitchNavigator({
     Auth: {
         screen: AuthStack,
     },
-    Tab: {
+    Main: {
         screen: TabNavigator,
     },
 }, {

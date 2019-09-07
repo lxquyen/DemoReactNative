@@ -1,15 +1,28 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import ApplicationStyles from '../../theme/ApplicationStyles';
 
 export default class DetailScreen extends React.Component {
-    UNSAFE_componentWillMount(): void {
-    }
+    static navigationOptions = {
+        title: 'DetailScreen',
+    };
+
+    _onGoBack = () => {
+        this.props.navigation.goBack();
+    };
+
+    _onGoToDetail = () => {
+        this.props.navigation.push('Detail');
+    };
 
     render() {
+        console.log('render DetailScreen');
         return (
             <View style={styles.container}>
-                <Text>Detail Screen</Text>
+                <Button title={'Go Back'} onPress={() => this._onGoBack()}/>
+
+                <Button title={'Go To Detail... again'} onPress={() => this._onGoToDetail()}/>
+
             </View>
         );
     }
