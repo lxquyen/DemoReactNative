@@ -16,10 +16,10 @@ export default class HomeScreen extends React.Component {
 
     _onGoToAddScreen = (item, index) => {
         console.log('_onGoToAddScreen', item);
-        if (index === null) {
+        if (index === undefined) {
             this.props.navigation.navigate('Add');
         } else {
-            this.props.navigation.navigate('Add', {name: item.name, index: item.index});
+            this.props.navigation.navigate('Add', {name: item.name, index: index});
         }
 
     };

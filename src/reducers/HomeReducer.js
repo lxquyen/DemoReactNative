@@ -22,7 +22,6 @@ let initData = {
 
 const homeReducer = (state = initData, action) => {
     let newData = state.data;
-    console.log('homReducer: ', action);
     switch (action.type) {
         case 'ADD':
             return {...state, data: [...state.data, {name: action.name, status: action.status}]};
