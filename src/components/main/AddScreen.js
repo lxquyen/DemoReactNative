@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, StyleSheet, TextInput, View} from 'react-native';
+import {Button, StyleSheet, TextInput, View, Alert} from 'react-native';
 
 export default class AddScreen extends React.Component {
     static navigationOptions = ({navigation}) => {
@@ -15,29 +15,33 @@ export default class AddScreen extends React.Component {
 
     constructor(props) {
         super(props);
-        const {navigation} = this.props;
-        const name = navigation.getParam('name');
-        const index = navigation.getParam('index');
         this.state = {
-            name: name === undefined ? '' : name,
-            index: index === undefined ? -1 : index,
+            name: '',
         };
         this.props.navigation.setParams({onSave: this._onSave});
     }
 
     _onSave = () => {
-        const {onAdd, onEdit} = this.props;
-        const {name, index} = this.state;
-        if (index !== -1) {
-            onEdit(name, index);
-        } else {
-            onAdd(name);
+        const {name} = this.state;
+
+        if (!name) {
+            Alert.alert('Tên không được để trống...');
+            return;
         }
+        const {onAddTask, onEditTask} = this.props;
+        onAddTask({name: name, status: false});
         this.props.navigation.goBack();
 
     };
 
+    _onChangeText = (text) => {
+        this.setState({
+            name: text,
+        });
+    };
+
     render() {
+
         return (
             <View style={styles.container}>
                 <TextInput
@@ -46,7 +50,7 @@ export default class AddScreen extends React.Component {
                     underlineColorAndroid={'transparent'}
                     style={styles.input}
                     placeholder={'Name'}
-                    onChangeText={text => this.setState({name: text})}
+                    onChangeText={this._onChangeText}
                 />
             </View>
         );

@@ -14,33 +14,34 @@ export default class HomeScreen extends React.Component {
         };
     };
 
-    _onGoToAddScreen = (item, index) => {
-        this.props.navigation.navigate('Add', {name: item.name, index: index});
+    _onGoToAddScreen = (item) => {
+        this.props.navigation.navigate('Add');
     };
 
     componentDidMount() {
+        this.props.onFetchTask();
         this.props.navigation.setParams({onGoToAddScreen: this._onGoToAddScreen});
     }
 
     FlatListItemSeparator = () => <View style={styles.line}/>;
 
     render() {
-        const {data} = this.props.data;
+        const {tasks} = this.props;
         return (
             <FlatList
                 style={{padding: 10}}
-                data={data}
+                data={tasks}
                 ItemSeparatorComponent={this.FlatListItemSeparator}
                 extraData={this.props}
                 renderItem={this.renderItem}
-                keyExtractor={(item, index) => `${index}`}/>
+                keyExtractor={(item) => item.id}/>
         );
     }
 
     renderItem = ({item, index}) => {
         const {onFinishedItem, onDeleteItem} = this.props;
         return (
-            <TouchableOpacity onPress={() => this._onGoToAddScreen(item, index)}>
+            <TouchableOpacity onPress={() => this._onGoToAddScreen(item)}>
                 <View style={styles.itemContainer}>
                     <View style={{justifyContent: 'center'}}>
                         <TouchableOpacity style={{marginTop: -2, marginEnd: 10}} onPress={() => onFinishedItem(index)}>

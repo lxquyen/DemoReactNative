@@ -1,12 +1,9 @@
-import {all} from 'redux-saga/effects';
-import {watchAddAction} from './HomeSaga';
-
-function* sayHell() {
-    console.log('Hello world!');
-}
+import {call, all, fork} from 'redux-saga/effects';
+import {watchAddNewTask, watchFetchTasks} from './TaskSagas';
 
 export default function* rootSaga() {
     yield all([
-        sayHell(),
-        watchAddAction()]);
+        watchFetchTasks(),
+        watchAddNewTask(),
+    ]);
 }

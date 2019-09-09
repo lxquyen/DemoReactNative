@@ -9,15 +9,15 @@
 import React from 'react';
 import AppContainer from './navigators/AppNavigator';
 import {Provider} from 'react-redux';
-import {combineReducers, createStore, applyMiddleware} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import homeReducer from './reducers/HomeReducer';
 import rootSaga from './sagas/RootSaga';
+import allReducers from './reducers';
 
 //Middleware
 const sagaMiddleware = createSagaMiddleware();
 //Create Store
-const store = createStore(combineReducers({homeReducer}), applyMiddleware(sagaMiddleware));
+const store = createStore(allReducers, applyMiddleware(sagaMiddleware));
 
 const App = () => {
     return (

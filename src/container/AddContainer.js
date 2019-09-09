@@ -1,7 +1,6 @@
 import {connect} from 'react-redux';
-import {editSuccessAction} from '../action/HomeAction';
 import AddScreen from '../components/main/AddScreen';
-import {addAction} from '../action/AddAction';
+import {addTaskAction, editTaskAction} from '../action';
 
 const mapStateToProps = (state) => {
     return {};
@@ -9,8 +8,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAdd: (name) => dispatch(addAction(name)),
-        onEdit: (name, index) => dispatch(editSuccessAction(name, index)),
+        onAddTask: (task) => dispatch(addTaskAction(task)),
+        onEditTask: (task) => dispatch(editTaskAction(task)),
     };
 };
 
