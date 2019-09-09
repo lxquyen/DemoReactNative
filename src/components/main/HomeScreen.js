@@ -15,13 +15,7 @@ export default class HomeScreen extends React.Component {
     };
 
     _onGoToAddScreen = (item, index) => {
-        console.log('_onGoToAddScreen', item);
-        if (index === undefined) {
-            this.props.navigation.navigate('Add');
-        } else {
-            this.props.navigation.navigate('Add', {name: item.name, index: index});
-        }
-
+        this.props.navigation.navigate('Add', {name: item.name, index: index});
     };
 
     componentDidMount() {
@@ -34,6 +28,7 @@ export default class HomeScreen extends React.Component {
         const {data} = this.props.data;
         return (
             <FlatList
+                style={{padding: 10}}
                 data={data}
                 ItemSeparatorComponent={this.FlatListItemSeparator}
                 extraData={this.props}
@@ -79,7 +74,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: 'white',
-        marginHorizontal: 10,
         paddingHorizontal: 10,
         paddingVertical: 15,
         borderRadius: 5,
